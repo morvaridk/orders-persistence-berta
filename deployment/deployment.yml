@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: orders-cloudlab4
+  labels:
+    example: orders-cloudlab4
+  annotations:
+    auth.istio.io/8017: NONE
+spec:
+  ports:
+  - name: http
+    port: 8017
+  selector:
+    example: orders-cloudlab4
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: orders-cloudlab4
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        example: orders-cloudlab4
+      annotations:
+        sidecar.istio.io/inject: "true"
+    spec:
+      containers:
+      - image: morvaridk20/orders-cloudlab4:latest
+        imagePullPolicy: Always
+        name: orders-cloudlab4
+        ports:
+        - name: http
+          containerPort: 8017
+        resources:
+          limits:
+            memory: 100Mi
+          requests:
+            memory: 32Mi
+        env:
+        - name: dbtype
+          # available dbtypes are: [memory, mssql]
+          value: "memory"
+
+
