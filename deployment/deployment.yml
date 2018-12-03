@@ -18,7 +18,7 @@ kind: Deployment
 metadata:
   name: orders-persistence-berta
 spec:
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
