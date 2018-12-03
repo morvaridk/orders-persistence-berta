@@ -91,11 +91,13 @@ components:
         town:
           type: string
           example: Brighton
+        productCode:
+          type: string
+          example: 1234567890
       required:
         - orderId
         - total
-        - postalCode
-        - town
+        - productCode
     OrderList:
       type: array
       items:
