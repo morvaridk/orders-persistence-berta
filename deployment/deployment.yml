@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: orders-cloudlab4
+  name: orders-persistence-berta
   labels:
-    example: orders-cloudlab4
+    example: orders-persistence-berta
   annotations:
     auth.istio.io/8017: NONE
 spec:
@@ -11,25 +11,25 @@ spec:
   - name: http
     port: 8017
   selector:
-    example: orders-cloudlab4
+    example: orders-persistence-berta
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: orders-cloudlab4
+  name: orders-persistence-berta
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        example: orders-cloudlab4
+        example: orders-persistence-berta
       annotations:
         sidecar.istio.io/inject: "true"
     spec:
       containers:
-      - image: morvaridk20/orders-cloudlab4:latest
+      - image: morvaridk20/orders-persistence-berta:latest
         imagePullPolicy: Always
-        name: orders-cloudlab4
+        name: orders-persistence-berta
         ports:
         - name: http
           containerPort: 8017
